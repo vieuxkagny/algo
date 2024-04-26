@@ -1,0 +1,38 @@
+ALGORITHM lire_une_phrase
+VAR
+    nbr_voyelle, nbr_caractere, nbr_mots: INTEGER := 0;
+    i: INTEGER;
+    caracter_precedent: BOOLEAN := TRUE;  (* To handle word count *)
+
+BEGIN
+    READ(nbr_caractere);
+    READ(nbr_mots);
+    READ(nbr_voyelle);
+
+    FOR i FROM 1 TO nbr_caractere DO
+        CURRENT_CHARACTER <- READ_CHARACTER(); (* This function should be defined to read each character from input *)
+        
+        IF CURRENT_CHARACTER IS IN {'a', 'e', 'i', 'o', 'u', 'y'} THEN
+            nbr_voyelle <- nbr_voyelle + 1;
+        END IF
+
+        IF CURRENT_CHARACTER IS A SPACE AND NOT (caracter_precedent) THEN
+            nbr_mots <- nbr_mots + 1;
+        END IF
+        
+        IF CURRENT_CHARACTER IS NOT A SPACE THEN
+            caracter_precedent <- FALSE;
+        ELSE
+            caracter_precedent <- TRUE;
+        END IF
+    END FOR
+
+
+    IF NOT(caracter_precedent) THEN
+        nbr_mots <- nbr_mots + 1;
+    END IF
+
+    WRITE("nombre de caractere: ", nbr_caractere);
+    WRITE("nombre de mots: ", nbr_mots);
+    WRITE("nombre de voyelle: ", nbr_voyelle);
+END read_a_sentence
